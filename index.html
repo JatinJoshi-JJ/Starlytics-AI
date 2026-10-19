@@ -1,0 +1,1575 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    Starlytics AI — Smart Rating & Customer Feedback Intelligence Platform
+  </title>
+  <meta name="description"
+    content="Transform feedback into actionable insights. Evolve the 5-star rating widget into a high-precision, token-driven customer intelligence platform." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+  <!-- Lenis Smooth Scroll CDN -->
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+  <!-- Google Fonts: Syne, Outfit, Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blue: "#2244e8",
+              blueDark: "#152fb5",
+              acid: "#cbf916",
+              acidHover: "#b5e30c",
+              textPrimary: "#211922",
+              textSecondary: "#000000",
+              textTertiary: "#2b48d4",
+              surfaceBase: "#ffffff",
+              surfaceRaised: "#fbfbf9",
+              surfaceStrong: "#e5e5e0",
+              dark: "#0e0e11",
+              cardDark: "#17171c",
+              borderDark: "#26262e",
+            },
+          },
+          fontFamily: {
+            display: ["Syne", "sans-serif"],
+            sans: [
+              "Outfit",
+              "-apple-system",
+              "BlinkMacSystemFont",
+              "Segoe UI",
+              "Roboto",
+              "sans-serif",
+            ],
+            mono: ["Space Grotesk", "monospace"],
+          },
+          borderRadius: {
+            xs: "8px",
+            sm: "16px",
+            pill: "50px",
+          },
+          animation: {
+            marquee: "marquee 22s linear infinite",
+            "float-slow": "float 5s ease-in-out infinite",
+            "spin-slow": "spin 20s linear infinite",
+          },
+          keyframes: {
+            marquee: {
+              "0%": { transform: "translateX(0%)" },
+              "100%": { transform: "translateX(-50%)" },
+            },
+            float: {
+              "0%, 100%": { transform: "translateY(0px)" },
+              "50%": { transform: "translateY(-10px)" },
+            },
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body
+  class="bg-brand-surfaceRaised text-brand-textPrimary dark:bg-brand-dark dark:text-[#f2f2f5] overflow-x-hidden selection:bg-brand-acid selection:text-black">
+  <!-- ============================================================== -->
+  <!-- 1. ANNOUNCEMENT BAR                                            -->
+  <!-- ============================================================== -->
+  <div
+    class="bg-brand-acid text-black py-2.5 px-4 text-xs font-bold tracking-wider uppercase text-center flex items-center justify-center gap-2 border-b-2 border-black z-50 relative">
+    <span class="inline-block w-2.5 h-2.5 rounded-full bg-black animate-ping"></span>
+    <span class="font-display font-black tracking-normal sm:tracking-wider">Discover a smarter way to understand
+      customer feedback.</span>
+    <span
+      class="hidden md:inline-block bg-black text-brand-acid text-[10px] font-mono px-2 py-0.5 rounded-full ml-2">WCAG
+      2.2 AA VERIFIED</span>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 2. STICKY NAVIGATION BAR                                       -->
+  <!-- ============================================================== -->
+  <header class="sticky top-0 z-40 bg-[#0e0e11]/90 backdrop-blur-md border-b border-brand-borderDark text-white">
+    <div class="w-full px-3 sm:px-5 lg:px-6 h-20 flex items-center justify-between gap-3 lg:gap-6">
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center gap-2.5 sm:gap-3 group focus:outline-none shrink-0"
+        aria-label="Starlytics AI Home">
+        <div
+          class="w-10 h-10 rounded-full bg-brand-acid flex items-center justify-center text-black font-black text-xl shadow-lg shadow-brand-acid/30 group-hover:rotate-45 transition-transform duration-300 shrink-0">
+          ★
+        </div>
+        <div class="flex flex-col">
+          <span
+            class="text-xl sm:text-2xl font-black font-display tracking-tight uppercase flex items-center leading-none">
+            Starlytics<span class="text-brand-acid">.AI</span>
+          </span>
+          <span class="block text-[9px] font-mono tracking-widest text-zinc-400 uppercase mt-0.5">Feedback
+            Intelligence</span>
+        </div>
+      </a>
+
+      <!-- Desktop Links (Engineered 2-Line Cyber-Brutalist Layout) -->
+      <nav class="hidden lg:flex items-center gap-2 xl:gap-4 2xl:gap-6 text-zinc-300 shrink-0"
+        aria-label="Primary Navigation">
+        <a href="#widget"
+          class="group flex flex-col items-start px-2 py-1 rounded hover:bg-white/5 transition-all text-left">
+          <span class="text-[10px] font-mono font-bold text-brand-acid tracking-wider leading-none">01. RATING</span>
+          <span
+            class="text-[11px] xl:text-xs font-mono font-bold tracking-wider uppercase text-zinc-300 group-hover:text-white transition-colors leading-tight mt-0.5 whitespace-nowrap">WIDGET</span>
+        </a>
+        <a href="#aspects"
+          class="group flex flex-col items-start px-2 py-1 rounded hover:bg-white/5 transition-all text-left">
+          <span class="text-[10px] font-mono font-bold text-brand-acid tracking-wider leading-none">02. ASPECT</span>
+          <span
+            class="text-[11px] xl:text-xs font-mono font-bold tracking-wider uppercase text-zinc-300 group-hover:text-white transition-colors leading-tight mt-0.5 whitespace-nowrap">RATING</span>
+        </a>
+        <a href="#analytics"
+          class="group flex flex-col items-start px-2 py-1 rounded hover:bg-white/5 transition-all text-left">
+          <span class="text-[10px] font-mono font-bold text-brand-acid tracking-wider leading-none">03. LIVE</span>
+          <span
+            class="text-[11px] xl:text-xs font-mono font-bold tracking-wider uppercase text-zinc-300 group-hover:text-white transition-colors leading-tight mt-0.5 whitespace-nowrap">ANALYTICS</span>
+        </a>
+        <a href="#insights"
+          class="group flex flex-col items-start px-2 py-1 rounded hover:bg-white/5 transition-all text-left">
+          <span class="text-[10px] font-mono font-bold text-brand-acid tracking-wider leading-none">04. AI</span>
+          <span
+            class="text-[11px] xl:text-xs font-mono font-bold tracking-wider uppercase text-zinc-300 group-hover:text-white transition-colors leading-tight mt-0.5 whitespace-nowrap">INSIGHTS</span>
+        </a>
+        <a href="#reviews"
+          class="group flex flex-col items-start px-2 py-1 rounded hover:bg-white/5 transition-all text-left">
+          <span class="text-[10px] font-mono font-bold text-brand-acid tracking-wider leading-none">05. LIVE</span>
+          <span
+            class="text-[11px] xl:text-xs font-mono font-bold tracking-wider uppercase text-zinc-300 group-hover:text-white transition-colors leading-tight mt-0.5 whitespace-nowrap">FEED</span>
+        </a>
+        <a href="#faq"
+          class="group flex flex-col items-start px-2 py-1 rounded hover:bg-white/5 transition-all text-left">
+          <span class="text-[10px] font-mono font-bold text-brand-acid tracking-wider leading-none">06.</span>
+          <span
+            class="text-[11px] xl:text-xs font-mono font-bold tracking-wider uppercase text-zinc-300 group-hover:text-white transition-colors leading-tight mt-0.5 whitespace-nowrap">FAQ</span>
+        </a>
+      </nav>
+
+      <!-- Right Controls: Theme Toggle & Primary CTA -->
+      <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
+        <!-- Theme Toggle -->
+        <button id="themeToggleBtn"
+          class="w-10 h-10 rounded-pill bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-sm transition-all focus:outline-none shrink-0"
+          aria-label="Toggle Light and Dark Mode" title="Toggle Theme">
+          <span id="themeIcon">☀️</span>
+        </button>
+
+        <!-- Start Rating CTA -->
+        <a href="#widget"
+          class="hidden sm:inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-pill bg-brand-acid text-black font-display font-extrabold text-xs uppercase tracking-wider hover:bg-brand-acidHover shadow-lg shadow-brand-acid/20 transition-transform active:scale-95 border border-black shrink-0 whitespace-nowrap">
+          <span>Start Rating</span>
+          <span>↓</span>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobileMenuBtn"
+          class="lg:hidden w-10 h-10 rounded-xs bg-white/10 border border-white/20 flex items-center justify-center text-white text-lg focus:outline-none shrink-0"
+          aria-label="Toggle Mobile Menu" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Navigation -->
+    <div id="mobileMenu"
+      class="hidden lg:hidden bg-brand-cardDark border-b border-brand-borderDark px-6 py-5 text-sm font-mono space-y-3">
+      <a href="#widget" class="mobile-link block text-zinc-200 hover:text-brand-acid">01. Rating Widget</a>
+      <a href="#aspects" class="mobile-link block text-zinc-200 hover:text-brand-acid">02. Aspect Rating</a>
+      <a href="#analytics" class="mobile-link block text-zinc-200 hover:text-brand-acid">03. Live Analytics</a>
+      <a href="#insights" class="mobile-link block text-zinc-200 hover:text-brand-acid">04. AI Insights</a>
+      <a href="#reviews" class="mobile-link block text-zinc-200 hover:text-brand-acid">05. Live Feed</a>
+      <a href="#faq" class="mobile-link block text-zinc-200 hover:text-brand-acid">06. FAQ</a>
+      <a href="#widget"
+        class="mobile-link block text-center py-2.5 rounded-pill bg-brand-acid text-black font-bold">Start Rating
+        Now</a>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- 3. HERO SECTION (Aurelia Swiss-Brutalist Layout)               -->
+  <!-- ============================================================== -->
+  <section id="hero"
+    class="relative bg-brand-blue text-white overflow-hidden hero-grid-pattern border-b-4 border-brand-acid">
+    <!-- Ambient Blur Spheres -->
+    <div
+      class="absolute -top-24 -left-24 w-96 h-96 bg-brand-blueDark rounded-full blur-3xl pointer-events-none opacity-70">
+    </div>
+    <div class="absolute top-1/2 -right-20 w-80 h-80 bg-brand-acid/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- Decorative Stars -->
+    <div
+      class="absolute top-12 left-10 text-brand-acid opacity-40 select-none animate-spin-slow pointer-events-none hidden sm:block">
+      <svg class="w-14 h-14 fill-current" viewBox="0 0 24 24">
+        <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
+      </svg>
+    </div>
+    <div class="absolute top-36 right-16 text-brand-acid opacity-60 select-none pointer-events-none animate-float-slow">
+      <svg class="w-16 h-16 fill-current" viewBox="0 0 24 24">
+        <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
+      </svg>
+    </div>
+
+    <div
+      class="relative z-20 max-w-7xl mx-auto px-6 py-12 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <!-- Left Column: Metrics & Trust Badges -->
+      <div class="lg:col-span-3 flex flex-col justify-center space-y-6 order-2 lg:order-1">
+        <div class="bg-black/40 backdrop-blur-md p-4 rounded-sm border border-white/20 shadow-xl">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex -space-x-2">
+              <span
+                class="w-7 h-7 rounded-full bg-brand-acid text-black flex items-center justify-center font-bold text-xs border border-brand-blue">★</span>
+              <span
+                class="w-7 h-7 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-[10px] border border-brand-blue">AI</span>
+              <span
+                class="w-7 h-7 rounded-full bg-emerald-400 text-black flex items-center justify-center font-bold text-[10px] border border-brand-blue">UX</span>
+            </div>
+            <span
+              class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-mono font-bold">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              SYSTEM READY
+            </span>
+          </div>
+          <p class="text-[11px] leading-snug font-mono text-white/90 uppercase tracking-wider">
+            Token-Driven UI Guidance &amp; Interactive Star Rating
+            Architecture.
+          </p>
+        </div>
+
+        <!-- Metric Numbers -->
+        <div class="space-y-4 pt-2">
+          <div class="border-b border-white/20 pb-2">
+            <div class="text-3xl sm:text-5xl font-black font-display text-white tracking-tight flex items-baseline">
+              <span id="heroAvgRating">4.8</span><span class="text-brand-acid ml-1">★</span>
+            </div>
+            <div class="text-[11px] uppercase font-mono tracking-widest text-white/80">
+              Average User Rating
+            </div>
+          </div>
+
+          <div class="border-b border-white/20 pb-2">
+            <div class="text-3xl sm:text-5xl font-black font-display text-white tracking-tight flex items-baseline">
+              <span id="heroTotalRatings">1,280</span><span class="text-brand-acid ml-1">+</span>
+            </div>
+            <div class="text-[11px] uppercase font-mono tracking-widest text-white/80">
+              Verified Feedback Insights
+            </div>
+          </div>
+
+          <div>
+            <div class="text-3xl sm:text-5xl font-black font-display text-white tracking-tight flex items-baseline">
+              <span>96.4</span><span class="text-brand-acid ml-1">%</span>
+            </div>
+            <div class="text-[11px] uppercase font-mono tracking-widest text-white/80">
+              Positive Experience (CSAT)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center & Right: Typographic Monument & Interactive Card -->
+      <div class="lg:col-span-9 relative flex flex-col justify-center order-1 lg:order-2">
+        <div class="relative w-full">
+          <!-- Monument Typographic Title -->
+          <div class="relative z-0 select-none">
+            <h1
+              class="font-display font-black text-5xl sm:text-7xl md:text-8xl lg:text-[7.6rem] leading-[0.85] tracking-tighter uppercase">
+              <span class="block text-brand-acid drop-shadow-2xl">Every Rating</span>
+              <span class="block text-stroke-lime cursor-default">Tells A Story</span>
+            </h1>
+          </div>
+
+          <!-- Interactive Floating Mini Card Preview -->
+          <div class="lg:absolute lg:top-0 lg:right-4 z-20 my-6 lg:my-0 flex items-center justify-center">
+            <div
+              class="relative group bg-brand-dark/95 backdrop-blur-md p-6 rounded-sm border-2 border-brand-acid shadow-2xl max-w-xs text-left">
+              <div class="flex items-center justify-between mb-4">
+                <span
+                  class="text-[10px] font-mono font-bold uppercase text-brand-acid bg-black/60 px-2 py-0.5 rounded-full border border-brand-acid/30">
+                  LIVE INTERACTIVE PREVIEW
+                </span>
+                <span class="text-xs">⚡</span>
+              </div>
+              <div class="flex gap-1.5 text-brand-acid text-2xl mb-2">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <p class="text-xs text-zinc-300 font-sans leading-relaxed mb-4">
+                “Transform raw user sentiment into structured design tokens,
+                actionable scores, and instant visual telemetry.”
+              </p>
+              <div class="flex items-center justify-between border-t border-white/10 pt-3 text-[11px] font-mono">
+                <span class="text-white/70">RateWise Intelligence</span>
+                <span class="text-brand-acid font-bold">5.0 / 5.0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Action Controls -->
+          <div
+            class="relative z-20 mt-8 max-w-xl bg-black/45 backdrop-blur-md p-6 rounded-sm border border-white/20 shadow-2xl">
+            <p class="text-xs sm:text-sm text-white/90 leading-relaxed font-sans mb-6">
+              Collect feedback, understand customer experiences, and turn
+              ratings into meaningful insights with a beautifully designed
+              feedback intelligence platform built on Pin Sans tokens.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-3">
+              <!-- Primary CTA -->
+              <a href="#widget"
+                class="px-6 py-3.5 rounded-pill bg-brand-acid text-black font-display font-black text-xs uppercase tracking-wider hover:bg-brand-acidHover shadow-xl shadow-brand-acid/30 transition-transform active:scale-95 border-2 border-black flex items-center gap-2">
+                <span>Start Rating</span>
+                <span>★</span>
+              </a>
+
+              <!-- Secondary CTA -->
+              <a href="#analytics"
+                class="px-5 py-3.5 rounded-pill bg-white/10 hover:bg-white/20 text-white border border-white/30 text-xs font-mono font-bold tracking-wider uppercase transition">
+                Explore Analytics ↗
+              </a>
+
+              <!-- CELEBRATION BLAST TRIGGER -->
+              <button id="heroCheerBlastBtn"
+                class="px-5 py-3.5 rounded-pill bg-black/80 hover:bg-black text-brand-acid border-2 border-brand-acid text-xs font-display font-black uppercase tracking-wider shadow-lg transition-transform active:scale-95 flex items-center gap-2">
+                <span>🎉</span> Give Respect &amp; Cheer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 4. INFINITE ACCENT MARQUEE TICKER                              -->
+  <!-- ============================================================== -->
+  <div class="relative w-full bg-brand-acid text-black py-3.5 overflow-hidden border-y-2 border-black z-20 shadow-md">
+    <div
+      class="flex whitespace-nowrap animate-marquee font-display font-black text-lg sm:text-2xl tracking-tight uppercase select-none">
+      <span class="mx-4 flex items-center gap-4">
+        BRANDING <span class="text-black">✦</span> STAR RATING WIDGET
+        <span class="text-black">✦</span> CSAT SATISFACTION
+        <span class="text-black">✦</span> REAL-TIME ANALYTICS
+        <span class="text-black">✦</span> DESIGN SYSTEM TOKENS
+        <span class="text-black">✦</span> ACCESSIBILITY WCAG 2.2
+        <span class="text-black">✦</span>
+      </span>
+      <span class="mx-4 flex items-center gap-4">
+        BRANDING <span class="text-black">✦</span> STAR RATING WIDGET
+        <span class="text-black">✦</span> CSAT SATISFACTION
+        <span class="text-black">✦</span> REAL-TIME ANALYTICS
+        <span class="text-black">✦</span> DESIGN SYSTEM TOKENS
+        <span class="text-black">✦</span> ACCESSIBILITY WCAG 2.2
+        <span class="text-black">✦</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 5. VALUE & TRUST HIGHLIGHTS                                    -->
+  <!-- ============================================================== -->
+  <section
+    class="py-14 px-6 bg-brand-surfaceRaised dark:bg-[#121216] border-b border-brand-surfaceStrong dark:border-brand-borderDark">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div
+        class="p-6 rounded-sm bg-white dark:bg-brand-cardDark border border-brand-surfaceStrong dark:border-brand-borderDark shadow-sm hover:border-brand-blue transition">
+        <div
+          class="w-10 h-10 rounded-full bg-brand-acid text-black flex items-center justify-center font-black text-base mb-4">
+          ★
+        </div>
+        <h3 class="font-display font-black text-sm uppercase tracking-wide mb-1 dark:text-white">
+          Simple Rating Collection
+        </h3>
+        <p class="text-xs text-neutral-600 dark:text-zinc-400 font-sans leading-relaxed">
+          5 clickable, accessible stars with real-time hover previews, instant
+          labels, and keyboard support.
+        </p>
+      </div>
+
+      <div
+        class="p-6 rounded-sm bg-white dark:bg-brand-cardDark border border-brand-surfaceStrong dark:border-brand-borderDark shadow-sm hover:border-brand-blue transition">
+        <div
+          class="w-10 h-10 rounded-full bg-brand-blue text-white flex items-center justify-center font-black text-base mb-4">
+          📊
+        </div>
+        <h3 class="font-display font-black text-sm uppercase tracking-wide mb-1 dark:text-white">
+          Clear Visualizations
+        </h3>
+        <p class="text-xs text-neutral-600 dark:text-zinc-400 font-sans leading-relaxed">
+          Dynamic rating distribution meters, circular CSAT gauges, and
+          automated transparent trend analysis.
+        </p>
+      </div>
+
+      <div
+        class="p-6 rounded-sm bg-white dark:bg-brand-cardDark border border-brand-surfaceStrong dark:border-brand-borderDark shadow-sm hover:border-brand-blue transition">
+        <div
+          class="w-10 h-10 rounded-full bg-black text-brand-acid flex items-center justify-center font-black text-base mb-4 border border-brand-acid">
+          ♿
+        </div>
+        <h3 class="font-display font-black text-sm uppercase tracking-wide mb-1 dark:text-white">
+          Accessible by Design
+        </h3>
+        <p class="text-xs text-neutral-600 dark:text-zinc-400 font-sans leading-relaxed">
+          WCAG 2.2 AA compliant contrast, high-visibility focus indicators,
+          and screen-reader announcements.
+        </p>
+      </div>
+
+      <div
+        class="p-6 rounded-sm bg-white dark:bg-brand-cardDark border border-brand-surfaceStrong dark:border-brand-borderDark shadow-sm hover:border-brand-blue transition">
+        <div
+          class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-black text-base mb-4">
+          🔒
+        </div>
+        <h3 class="font-display font-black text-sm uppercase tracking-wide mb-1 dark:text-white">
+          Privacy-Conscious
+        </h3>
+        <p class="text-xs text-neutral-600 dark:text-zinc-400 font-sans leading-relaxed">
+          Local client-side browser storage without invasive cross-site
+          trackers or unauthorized telemetry.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 6. CORE INTERACTIVE STAR RATING WIDGET & WRITTEN REVIEW FORM   -->
+  <!-- ============================================================== -->
+  <section id="widget"
+    class="py-20 px-6 bg-white dark:bg-brand-dark border-b border-brand-surfaceStrong dark:border-brand-borderDark">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span
+          class="inline-block px-3 py-1 rounded-full bg-brand-blue/10 dark:bg-brand-blue/30 text-brand-blue dark:text-brand-acid font-mono text-xs font-bold uppercase tracking-widest mb-3">
+          ✦ Core Assignment Deliverable
+        </span>
+        <h2
+          class="text-3xl sm:text-5xl font-display font-black uppercase tracking-tight text-brand-textPrimary dark:text-white">
+          Interactive Star Rating Widget
+        </h2>
+        <p class="text-xs sm:text-sm text-neutral-600 dark:text-zinc-400 mt-2 font-sans">
+          Select a rating from 1 to 5 stars. Hover to preview, click or press
+          Enter to lock in, and share an optional written review.
+        </p>
+      </div>
+
+      <!-- Main Widget Card -->
+      <div
+        class="bg-brand-surfaceRaised dark:bg-brand-cardDark rounded-sm border-2 border-brand-textPrimary dark:border-brand-borderDark p-6 sm:p-10 shadow-2xl relative">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <!-- Left: 5 Interactive Stars & Emoji Sync -->
+          <div
+            class="lg:col-span-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-brand-surfaceStrong dark:border-brand-borderDark pb-8 lg:pb-0 lg:pr-8">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-mono font-bold uppercase tracking-wider text-neutral-500 dark:text-zinc-400">
+                  Click or Tap Stars to Rate
+                </span>
+                <button id="resetRatingBtn"
+                  class="text-[11px] font-mono text-rose-600 hover:text-rose-700 dark:text-rose-400 underline font-bold focus:outline-none"
+                  title="Reset star selection">
+                  Reset Rating ↺
+                </button>
+              </div>
+
+              <!-- 5 Accessible Interactive Star Buttons -->
+              <div id="starGroup" class="flex items-center gap-2 sm:gap-3 py-3" role="radiogroup"
+                aria-label="Star Rating from 1 to 5">
+                <!-- Star 1 -->
+                <button type="button" class="star-btn p-2 rounded-xs focus:outline-none" data-value="1" role="radio"
+                  aria-checked="false" aria-label="1 star - Poor">
+                  <svg
+                    class="star-icon w-10 h-10 sm:w-12 sm:h-12 fill-neutral-300 dark:fill-zinc-700 stroke-black dark:stroke-zinc-500"
+                    stroke-width="1.5" viewBox="0 0 24 24">
+                    <path
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                  </svg>
+                </button>
+                <!-- Star 2 -->
+                <button type="button" class="star-btn p-2 rounded-xs focus:outline-none" data-value="2" role="radio"
+                  aria-checked="false" aria-label="2 stars - Fair">
+                  <svg
+                    class="star-icon w-10 h-10 sm:w-12 sm:h-12 fill-neutral-300 dark:fill-zinc-700 stroke-black dark:stroke-zinc-500"
+                    stroke-width="1.5" viewBox="0 0 24 24">
+                    <path
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                  </svg>
+                </button>
+                <!-- Star 3 -->
+                <button type="button" class="star-btn p-2 rounded-xs focus:outline-none" data-value="3" role="radio"
+                  aria-checked="false" aria-label="3 stars - Good">
+                  <svg
+                    class="star-icon w-10 h-10 sm:w-12 sm:h-12 fill-neutral-300 dark:fill-zinc-700 stroke-black dark:stroke-zinc-500"
+                    stroke-width="1.5" viewBox="0 0 24 24">
+                    <path
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                  </svg>
+                </button>
+                <!-- Star 4 -->
+                <button type="button" class="star-btn p-2 rounded-xs focus:outline-none" data-value="4" role="radio"
+                  aria-checked="false" aria-label="4 stars - Very Good">
+                  <svg
+                    class="star-icon w-10 h-10 sm:w-12 sm:h-12 fill-neutral-300 dark:fill-zinc-700 stroke-black dark:stroke-zinc-500"
+                    stroke-width="1.5" viewBox="0 0 24 24">
+                    <path
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                  </svg>
+                </button>
+                <!-- Star 5 -->
+                <button type="button" class="star-btn p-2 rounded-xs focus:outline-none" data-value="5" role="radio"
+                  aria-checked="false" aria-label="5 stars - Excellent">
+                  <svg
+                    class="star-icon w-10 h-10 sm:w-12 sm:h-12 fill-neutral-300 dark:fill-zinc-700 stroke-black dark:stroke-zinc-500"
+                    stroke-width="1.5" viewBox="0 0 24 24">
+                    <path
+                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Rating Status Badge & Live Announcement -->
+              <div
+                class="mt-4 flex items-center justify-between bg-white dark:bg-black/50 p-4 rounded-xs border border-brand-surfaceStrong dark:border-brand-borderDark">
+                <div>
+                  <div class="text-[11px] font-mono uppercase text-neutral-500 dark:text-zinc-400">
+                    Current Rating
+                  </div>
+                  <div id="ratingTextDisplay"
+                    class="text-xl font-display font-black text-brand-textPrimary dark:text-white" aria-live="polite">
+                    No rating selected
+                  </div>
+                </div>
+                <div id="ratingScorePill"
+                  class="text-xs font-mono font-bold px-3 py-1.5 rounded-pill bg-brand-surfaceStrong dark:bg-zinc-800 text-neutral-600 dark:text-zinc-300">
+                  0 / 5
+                </div>
+              </div>
+
+              <!-- Section 8: Synchronized Emoji Experience Selector -->
+              <div class="mt-6">
+                <span
+                  class="block text-xs font-mono font-bold uppercase tracking-wider text-neutral-500 dark:text-zinc-400 mb-2">
+                  Or Tap Sentiment Emoji
+                </span>
+                <div
+                  class="flex items-center justify-between gap-1 p-2 bg-white dark:bg-black/40 rounded-xs border border-brand-surfaceStrong dark:border-brand-borderDark">
+                  <button type="button"
+                    class="emoji-btn flex-1 py-2 text-2xl hover:scale-125 transition-transform rounded-xs focus:outline-none"
+                    data-val="1" title="Very Poor (1 Star)">
+                    😡
+                  </button>
+                  <button type="button"
+                    class="emoji-btn flex-1 py-2 text-2xl hover:scale-125 transition-transform rounded-xs focus:outline-none"
+                    data-val="2" title="Poor (2 Stars)">
+                    😕
+                  </button>
+                  <button type="button"
+                    class="emoji-btn flex-1 py-2 text-2xl hover:scale-125 transition-transform rounded-xs focus:outline-none"
+                    data-val="3" title="Average (3 Stars)">
+                    😐
+                  </button>
+                  <button type="button"
+                    class="emoji-btn flex-1 py-2 text-2xl hover:scale-125 transition-transform rounded-xs focus:outline-none"
+                    data-val="4" title="Good (4 Stars)">
+                    😊
+                  </button>
+                  <button type="button"
+                    class="emoji-btn flex-1 py-2 text-2xl hover:scale-125 transition-transform rounded-xs focus:outline-none"
+                    data-val="5" title="Excellent (5 Stars)">
+                    😍
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Internship Guide Note -->
+            <div
+              class="mt-6 text-[11px] font-mono text-neutral-500 dark:text-zinc-400 leading-relaxed border-t border-brand-surfaceStrong dark:border-brand-borderDark pt-4">
+              <span>✦ Hover preview does not overwrite committed rating until
+                clicked. Keyboard navigation (Tab + Space/Enter)
+                supported.</span>
+            </div>
+          </div>
+
+          <!-- Right: Written Review Form with Gemini AI Assistant -->
+          <div class="lg:col-span-6">
+            <form id="feedbackForm" class="space-y-4" novalidate>
+              <div>
+                <label for="userNameInput"
+                  class="block text-xs font-mono font-bold uppercase tracking-wider text-brand-textPrimary dark:text-zinc-200 mb-1.5">
+                  Your Name (Optional)
+                </label>
+                <input type="text" id="userNameInput" maxlength="50" placeholder="e.g. Alex Rivera"
+                  class="w-full px-4 py-2.5 rounded-xs bg-white dark:bg-black/50 border border-brand-surfaceStrong dark:border-brand-borderDark text-sm focus:border-brand-acid text-brand-textPrimary dark:text-white transition" />
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between mb-1.5">
+                  <label for="userReviewInput"
+                    class="block text-xs font-mono font-bold uppercase tracking-wider text-brand-textPrimary dark:text-zinc-200">
+                    Written Feedback (Optional)
+                  </label>
+                  <span id="charCount" class="text-[11px] font-mono text-neutral-500 dark:text-zinc-400">0 / 300</span>
+                </div>
+                <textarea id="userReviewInput" rows="4" maxlength="300"
+                  placeholder="Share details of your experience with the platform..."
+                  class="w-full px-4 py-2.5 rounded-xs bg-white dark:bg-black/50 border border-brand-surfaceStrong dark:border-brand-borderDark text-sm focus:border-brand-acid text-brand-textPrimary dark:text-white transition resize-none"></textarea>
+              </div>
+
+              <!-- Gemini AI Review Enhancement Toolbar -->
+              <div class="p-3 bg-brand-blue/5 dark:bg-brand-blue/20 rounded-xs border border-brand-blue/20 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span
+                    class="text-[11px] font-mono font-bold text-brand-blue dark:text-brand-acid uppercase flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-brand-acid animate-pulse"></span>
+                    Smart Writing Assistant (Instant Engine)
+                  </span>
+                  <span id="aiAssistStatus"
+                    class="text-[10px] font-mono text-zinc-500 dark:text-zinc-400 hidden">Optimizing...</span>
+                </div>
+                <div class="flex flex-wrap gap-1.5">
+                  <button type="button" id="btnAiDraftReview"
+                    class="px-2.5 py-1 text-[11px] font-mono bg-white dark:bg-black/60 hover:bg-brand-acid hover:text-black border border-brand-surfaceStrong dark:border-white/10 rounded-xs text-brand-textPrimary dark:text-zinc-200 transition cursor-pointer"
+                    title="Draft review based on selected star and aspects">
+                    ✨ Auto-Draft Review
+                  </button>
+                  <button type="button" id="btnAiPolishReview"
+                    class="px-2.5 py-1 text-[11px] font-mono bg-white dark:bg-black/60 hover:bg-brand-acid hover:text-black border border-brand-surfaceStrong dark:border-white/10 rounded-xs text-brand-textPrimary dark:text-zinc-200 transition cursor-pointer"
+                    title="Polish tone, clarity and conciseness">
+                    💎 Polish &amp; Clarify
+                  </button>
+                  <button type="button" id="btnAiConstructiveReview"
+                    class="px-2.5 py-1 text-[11px] font-mono bg-white dark:bg-black/60 hover:bg-brand-acid hover:text-black border border-brand-surfaceStrong dark:border-white/10 rounded-xs text-brand-textPrimary dark:text-zinc-200 transition cursor-pointer"
+                    title="Make feedback constructive and actionable">
+                    🎯 Make Constructive
+                  </button>
+                </div>
+              </div>
+
+              <!-- Inline Validation / Error Message -->
+              <div id="formFeedbackMsg" class="hidden text-xs font-mono font-bold p-3 rounded-xs" role="alert"></div>
+
+              <!-- Form Action Buttons -->
+              <div class="flex items-center gap-3 pt-2">
+                <button type="submit" id="submitReviewBtn"
+                  class="flex-1 py-3.5 px-6 rounded-pill bg-brand-acid hover:bg-brand-acidHover text-black font-display font-black text-xs uppercase tracking-wider shadow-lg shadow-brand-acid/20 transition-transform active:scale-95 border-2 border-black flex items-center justify-center gap-2 cursor-pointer">
+                  <span>Submit Feedback</span>
+                  <span class="text-sm">🚀</span>
+                </button>
+
+                <button type="button" id="clearFormBtn"
+                  class="py-3.5 px-5 rounded-pill border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs font-mono uppercase tracking-wider transition cursor-pointer">
+                  Clear
+                </button>
+              </div>
+
+              <div class="text-[10px] font-mono text-neutral-500 dark:text-zinc-500 text-center pt-1">
+                Data saved securely in current browser localStorage.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 7. SECTION 9: MULTI-ASPECT RATING CATEGORIES                    -->
+  <!-- ============================================================== -->
+  <section id="aspects"
+    class="py-20 px-6 bg-brand-surfaceRaised dark:bg-[#121216] border-b border-brand-surfaceStrong dark:border-brand-borderDark">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div>
+          <span
+            class="inline-block text-xs font-mono font-bold uppercase tracking-widest text-brand-blue dark:text-brand-acid mb-2">
+            ✦ Granular Quality Metrics
+          </span>
+          <h2
+            class="text-3xl sm:text-5xl font-display font-black uppercase tracking-tight text-brand-textPrimary dark:text-white">
+            Category-Wise Evaluation
+          </h2>
+          <p class="text-xs sm:text-sm text-neutral-600 dark:text-zinc-400 max-w-2xl font-sans mt-1">
+            Rate specific aspects of the experience. Each category calculates
+            an independent aggregate score.
+          </p>
+        </div>
+
+        <div
+          class="bg-white dark:bg-brand-cardDark px-6 py-4 rounded-sm border border-brand-surfaceStrong dark:border-brand-borderDark flex items-center gap-4">
+          <div class="text-xs font-mono text-neutral-500 dark:text-zinc-400 uppercase">
+            Composite Aspect Score
+          </div>
+          <div id="aspectAverageScore" class="text-2xl font-display font-black text-brand-blue dark:text-brand-acid">
+            5.0 / 5.0
+          </div>
+        </div>
+      </div>
+
+      <!-- Aspect Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Aspect 1: UI & Interaction -->
+        <div
+          class="aspect-card p-6 rounded-sm bg-white dark:bg-brand-cardDark border border-brand-surfaceStrong dark:border-brand-borderDark shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-display font-bold text-sm uppercase text-brand-textPrimary dark:text-white">UI &amp;
+              Interaction Flow</span>
+            <span class="aspect-val text-xs font-mono font-bold text-brand-blue dark:text-brand-acid">5.0 / 5</span>
+          </div>
+          <p class="text-[11px] text-neutral-500 dark:text-zinc-400 mb-4 font-sans">
+            Responsiveness of stars, hover dynamics, and fluid layouts.
+          </p>
+          <div class="aspect-stars flex gap-2 text-xl cursor-pointer" data-category="ui">
+            <span class="aspect-star text-brand-acid" data-val="1">★</span>
+            <span class="aspect-star text-brand-acid" data-val="2">★</span>
+            <span class="aspect-star text-brand-acid" data-val="3">★</span>
+            <span class="aspect-star text-brand-acid" data-val="4">★</span>
+            <span class="aspect-star text-brand-acid" data-val="5">★</span>
+          </div>
+        </div>
+
+        <!-- Aspect 2: Performance & Speed -->
+        <div
+          class="aspect-card p-6 rounded-sm bg-white dark:bg-brand-cardDark border border-brand-surfaceStrong dark:border-brand-borderDark shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-display font-bold text-sm uppercase text-brand-textPrimary dark:text-white">Performance
+              &amp; Speed</span>
+            <span class="aspect-val text-xs font-mono font-bold text-brand-blue dark:text-brand-acid">5.0 / 5</span>
+          </div>
+          <p class="text-[11px] text-neutral-500 dark:text-zinc-400 mb-4 font-sans">
+            Instant DOM execution, zero lag, smooth transitions.
+          </p>
+          <div class="aspect-stars flex gap-2 text-xl cursor-pointer" data-category="speed">
+            <span class="aspect-star text-brand-acid" data-val="1">★</span>
+            <span class="aspect-star text-brand-acid" data-val="2">★</span>
+            <span class="aspect-star text-brand-acid" data-val="3">★</span>
+            <span class="aspect-star text-brand-acid" data-val="4">★</span>
+            <span class="aspect-star text-brand-acid" data-val="5">★</span>
+          </div>
+        </div>
+
+        <!-- Aspect 3: Design Token System -->
+        <div
+          class="aspect-card p-6 rounded-sm bg-white dark:bg-brand-cardDark border border-brand-surfaceStrong dark:border-brand-borderDark shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-display font-bold text-sm uppercase text-brand-textPrimary dark:text-white">Design Token
+              System</span>
+            <span class="aspect-val text-xs font-mono font-bold text-brand-blue dark:text-brand-acid">5.0 / 5</span>
+          </div>
+          <p class="text-[11px] text-neutral-500 dark:text-zinc-400 mb-4 font-sans">
+            Strict adherence to Design.md tokens &amp; Pin Sans stack.
+          </p>
+          <div class="aspect-stars flex gap-2 text-xl cursor-pointer" data-category="design">
+            <span class="aspect-star text-brand-acid" data-val="1">★</span>
+            <span class="aspect-star text-brand-acid" data-val="2">★</span>
+            <span class="aspect-star text-brand-acid" data-val="3">★</span>
+            <span class="aspect-star text-brand-acid" data-val="4">★</span>
+            <span class="aspect-star text-brand-acid" data-val="5">★</span>
+          </div>
+        </div>
+
+        <!-- Aspect 4: Features & Capabilities -->
+        <div
+          class="aspect-card p-6 rounded-sm bg-white dark:bg-brand-cardDark border border-brand-surfaceStrong dark:border-brand-borderDark shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-display font-bold text-sm uppercase text-brand-textPrimary dark:text-white">Features &amp;
+              Scope</span>
+            <span class="aspect-val text-xs font-mono font-bold text-brand-blue dark:text-brand-acid">5.0 / 5</span>
+          </div>
+          <p class="text-[11px] text-neutral-500 dark:text-zinc-400 mb-4 font-sans">
+            Emoji sync, live feedback stream, and CSAT calculations.
+          </p>
+          <div class="aspect-stars flex gap-2 text-xl cursor-pointer" data-category="features">
+            <span class="aspect-star text-brand-acid" data-val="1">★</span>
+            <span class="aspect-star text-brand-acid" data-val="2">★</span>
+            <span class="aspect-star text-brand-acid" data-val="3">★</span>
+            <span class="aspect-star text-brand-acid" data-val="4">★</span>
+            <span class="aspect-star text-brand-acid" data-val="5">★</span>
+          </div>
+        </div>
+
+        <!-- Aspect 5: WCAG 2.2 Accessibility -->
+        <div
+          class="aspect-card p-6 rounded-sm bg-white dark:bg-brand-cardDark border border-brand-surfaceStrong dark:border-brand-borderDark shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-display font-bold text-sm uppercase text-brand-textPrimary dark:text-white">WCAG 2.2 AA
+              Accessibility</span>
+            <span class="aspect-val text-xs font-mono font-bold text-brand-blue dark:text-brand-acid">5.0 / 5</span>
+          </div>
+          <p class="text-[11px] text-neutral-500 dark:text-zinc-400 mb-4 font-sans">
+            High-contrast focus rings, keyboard navigability, ARIA.
+          </p>
+          <div class="aspect-stars flex gap-2 text-xl cursor-pointer" data-category="a11y">
+            <span class="aspect-star text-brand-acid" data-val="1">★</span>
+            <span class="aspect-star text-brand-acid" data-val="2">★</span>
+            <span class="aspect-star text-brand-acid" data-val="3">★</span>
+            <span class="aspect-star text-brand-acid" data-val="4">★</span>
+            <span class="aspect-star text-brand-acid" data-val="5">★</span>
+          </div>
+        </div>
+
+        <!-- Aspect 6: Overall Experience Card -->
+        <div class="p-6 rounded-sm bg-brand-blue text-white shadow-md flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-acid mb-1 block">PLATFORM
+              STANDARD</span>
+            <h4 class="font-display font-black text-xl uppercase mb-2">
+              Holistic Quality Index
+            </h4>
+            <p class="text-xs text-white/80 font-sans leading-relaxed">
+              Every category directly informs the telemetry dashboard and
+              rule-based feedback insights.
+            </p>
+          </div>
+          <div class="pt-4 flex items-center justify-between border-t border-white/20 text-xs font-mono">
+            <span>Overall Verdict</span>
+            <span class="text-brand-acid font-bold">EXCELLENT ★★★★★</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 8. SECTIONS 10 & 11: RATING ANALYTICS & CSAT SATISFACTION METER -->
+  <!-- ============================================================== -->
+  <section id="analytics"
+    class="py-20 px-6 bg-white dark:bg-brand-dark border-b border-brand-surfaceStrong dark:border-brand-borderDark">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span
+          class="inline-block text-xs font-mono font-bold uppercase tracking-widest text-brand-blue dark:text-brand-acid mb-2">
+          ✦ Visual Telemetry
+        </span>
+        <h2
+          class="text-3xl sm:text-5xl font-display font-black uppercase tracking-tight text-brand-textPrimary dark:text-white">
+          Rating Analytics &amp; Customer Satisfaction
+        </h2>
+        <p class="text-xs sm:text-sm text-neutral-600 dark:text-zinc-400 font-sans mt-2">
+          Real-time rating distributions and CSAT analytics recalculated
+          instantly from locally submitted user feedback.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Left: Summary Stats & Distribution Bars -->
+        <div
+          class="lg:col-span-7 bg-brand-surfaceRaised dark:bg-brand-cardDark p-6 sm:p-8 rounded-sm border border-brand-surfaceStrong dark:border-brand-borderDark shadow-sm">
+          <div
+            class="grid grid-cols-3 gap-4 pb-6 border-b border-brand-surfaceStrong dark:border-brand-borderDark text-center">
+            <div>
+              <div class="text-[11px] font-mono uppercase text-neutral-500 dark:text-zinc-400">
+                Average Rating
+              </div>
+              <div
+                class="text-3xl sm:text-4xl font-display font-black text-brand-blue dark:text-brand-acid mt-1 flex items-center justify-center">
+                <span id="metricAverageRating">4.8</span><span class="text-xs ml-1">★</span>
+              </div>
+            </div>
+            <div>
+              <div class="text-[11px] font-mono uppercase text-neutral-500 dark:text-zinc-400">
+                Total Ratings
+              </div>
+              <div id="metricTotalRatings"
+                class="text-3xl sm:text-4xl font-display font-black text-brand-textPrimary dark:text-white mt-1">
+                3
+              </div>
+            </div>
+            <div>
+              <div class="text-[11px] font-mono uppercase text-neutral-500 dark:text-zinc-400">
+                5-Star Ratio
+              </div>
+              <div id="metricFiveStarPct"
+                class="text-3xl sm:text-4xl font-display font-black text-brand-textPrimary dark:text-white mt-1">
+                67%
+              </div>
+            </div>
+          </div>
+
+          <!-- Distribution Bars (1 to 5 Stars) -->
+          <div class="mt-6 space-y-3.5">
+            <div class="text-xs font-mono font-bold uppercase tracking-wider text-neutral-500 dark:text-zinc-400 mb-2">
+              Rating Distribution (1★ to 5★)
+            </div>
+
+            <!-- 5 Star Bar -->
+            <div class="flex items-center gap-3 text-xs font-mono">
+              <span class="w-12 text-neutral-600 dark:text-zinc-400">5 Stars</span>
+              <div class="flex-1 h-3 rounded-full bg-brand-surfaceStrong dark:bg-zinc-800 overflow-hidden">
+                <div id="bar-5" class="h-full bg-brand-acid transition-all duration-500" style="width: 67%"></div>
+              </div>
+              <span id="pct-5" class="w-10 text-right font-bold text-brand-textPrimary dark:text-white">67%</span>
+            </div>
+
+            <!-- 4 Star Bar -->
+            <div class="flex items-center gap-3 text-xs font-mono">
+              <span class="w-12 text-neutral-600 dark:text-zinc-400">4 Stars</span>
+              <div class="flex-1 h-3 rounded-full bg-brand-surfaceStrong dark:bg-zinc-800 overflow-hidden">
+                <div id="bar-4" class="h-full bg-brand-blue transition-all duration-500" style="width: 33%"></div>
+              </div>
+              <span id="pct-4" class="w-10 text-right font-bold text-brand-textPrimary dark:text-white">33%</span>
+            </div>
+
+            <!-- 3 Star Bar -->
+            <div class="flex items-center gap-3 text-xs font-mono">
+              <span class="w-12 text-neutral-600 dark:text-zinc-400">3 Stars</span>
+              <div class="flex-1 h-3 rounded-full bg-brand-surfaceStrong dark:bg-zinc-800 overflow-hidden">
+                <div id="bar-3" class="h-full bg-amber-400 transition-all duration-500" style="width: 0%"></div>
+              </div>
+              <span id="pct-3" class="w-10 text-right font-bold text-brand-textPrimary dark:text-white">0%</span>
+            </div>
+
+            <!-- 2 Star Bar -->
+            <div class="flex items-center gap-3 text-xs font-mono">
+              <span class="w-12 text-neutral-600 dark:text-zinc-400">2 Stars</span>
+              <div class="flex-1 h-3 rounded-full bg-brand-surfaceStrong dark:bg-zinc-800 overflow-hidden">
+                <div id="bar-2" class="h-full bg-orange-400 transition-all duration-500" style="width: 0%"></div>
+              </div>
+              <span id="pct-2" class="w-10 text-right font-bold text-brand-textPrimary dark:text-white">0%</span>
+            </div>
+
+            <!-- 1 Star Bar -->
+            <div class="flex items-center gap-3 text-xs font-mono">
+              <span class="w-12 text-neutral-600 dark:text-zinc-400">1 Star</span>
+              <div class="flex-1 h-3 rounded-full bg-brand-surfaceStrong dark:bg-zinc-800 overflow-hidden">
+                <div id="bar-1" class="h-full bg-rose-500 transition-all duration-500" style="width: 0%"></div>
+              </div>
+              <span id="pct-1" class="w-10 text-right font-bold text-brand-textPrimary dark:text-white">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: CSAT Circular Progress Gauge (Section 11) -->
+        <div
+          class="lg:col-span-5 bg-brand-surfaceRaised dark:bg-brand-cardDark p-6 sm:p-8 rounded-sm border border-brand-surfaceStrong dark:border-brand-borderDark shadow-sm flex flex-col items-center text-center">
+          <span class="text-xs font-mono font-bold uppercase tracking-wider text-neutral-500 dark:text-zinc-400 mb-6">
+            Customer Satisfaction Score (CSAT)
+          </span>
+
+          <!-- Circular SVG Gauge -->
+          <div class="relative w-44 h-44 flex items-center justify-center my-2">
+            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="8"
+                class="text-brand-surfaceStrong dark:text-zinc-800 fill-none" />
+              <circle id="csatCircleRing" cx="50" cy="50" r="40" stroke="#cbf916" stroke-width="8"
+                stroke-linecap="round" class="fill-none transition-all duration-700 ease-out" stroke-dasharray="251.2"
+                stroke-dashoffset="0" />
+            </svg>
+
+            <!-- Center Metric Label -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <span id="csatPercentageDisplay"
+                class="text-4xl font-display font-black text-brand-textPrimary dark:text-white tracking-tight">
+                100%
+              </span>
+              <span class="text-[10px] font-mono uppercase text-neutral-500 dark:text-zinc-400">POSITIVE</span>
+            </div>
+          </div>
+
+          <p class="text-xs text-neutral-600 dark:text-zinc-400 max-w-xs font-sans mt-4 leading-relaxed">
+            Calculated as the percentage of 4-star and 5-star positive
+            responses out of total feedback entries.
+          </p>
+
+          <div
+            class="mt-6 pt-4 border-t border-brand-surfaceStrong dark:border-brand-borderDark w-full grid grid-cols-2 gap-4 text-xs font-mono">
+            <div>
+              <span class="text-neutral-500 dark:text-zinc-400 block text-[10px] uppercase">Promoters (4-5★)</span>
+              <span id="csatPromotersCount" class="font-bold text-emerald-600 dark:text-brand-acid text-base">3</span>
+            </div>
+            <div>
+              <span class="text-neutral-500 dark:text-zinc-400 block text-[10px] uppercase">Detractors (1-2★)</span>
+              <span id="csatDetractorsCount" class="font-bold text-rose-500 text-base">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 9. SECTION 12: FEEDBACK INSIGHTS (Rule-Based & Gemini AI)      -->
+  <!-- ============================================================== -->
+  <section id="insights"
+    class="py-20 px-6 bg-brand-surfaceRaised dark:bg-brand-dark border-b border-brand-surfaceStrong dark:border-brand-borderDark">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div>
+          <span
+            class="inline-block text-xs font-mono font-bold uppercase tracking-widest text-brand-blue dark:text-brand-acid mb-2">
+            ✦ Intelligence Telemetry
+          </span>
+          <h2
+            class="text-3xl sm:text-5xl font-display font-black uppercase tracking-tight text-brand-textPrimary dark:text-white">
+            Feedback Intelligence &amp; Live Synthesis
+          </h2>
+          <p class="text-xs sm:text-sm text-neutral-600 dark:text-zinc-400 max-w-2xl font-sans mt-1">
+            Real-time sentiment telemetry and synthesized product insights
+            generated directly from community feedback.
+          </p>
+        </div>
+
+        <div>
+          <button id="runGeminiSynthesisBtn"
+            class="px-5 py-3 rounded-pill bg-brand-acid text-black hover:bg-brand-acidHover border border-black text-xs font-mono font-bold tracking-wider uppercase flex items-center gap-2 shadow-lg transition active:scale-95 cursor-pointer">
+            <span>⚡</span>
+            <span id="synthesisBtnText">Generate Synthesis Report</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Rule-Based Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="insightsGrid">
+        <!-- Insight 1 -->
+        <div
+          class="p-6 rounded-sm bg-white dark:bg-brand-cardDark border border-brand-surfaceStrong dark:border-brand-borderDark shadow-sm">
+          <div class="flex items-center gap-2 text-brand-acid text-base font-bold mb-3 font-mono">
+            <span>●</span> OVERWHELMINGLY POSITIVE
+          </div>
+          <h3 class="font-display font-bold text-lg uppercase text-brand-textPrimary dark:text-white mb-2">
+            Satisfaction Trending Upward
+          </h3>
+          <p class="text-xs text-neutral-600 dark:text-zinc-400 leading-relaxed font-sans" id="insightTrendText">
+            Over 96% of submitted reviews reflect 4 or 5 stars. Customers
+            consistently praise UI clarity and fast response times.
+          </p>
+        </div>
+
+        <!-- Insight 2 -->
+        <div
+          class="p-6 rounded-sm bg-white dark:bg-brand-cardDark border border-brand-surfaceStrong dark:border-brand-borderDark shadow-sm">
+          <div class="flex items-center gap-2 text-brand-blue dark:text-cyan-400 text-base font-bold mb-3 font-mono">
+            <span>●</span> ASPECT LEADER
+          </div>
+          <h3 class="font-display font-bold text-lg uppercase text-brand-textPrimary dark:text-white mb-2">
+            Design Tokens &amp; UI Flow
+          </h3>
+          <p class="text-xs text-neutral-600 dark:text-zinc-400 leading-relaxed font-sans">
+            The Pin Sans typography stack and high-contrast WCAG 2.2 focus
+            styling received the highest granular rating (5.0 / 5.0).
+          </p>
+        </div>
+
+        <!-- Insight 3 -->
+        <div
+          class="p-6 rounded-sm bg-white dark:bg-brand-cardDark border border-brand-surfaceStrong dark:border-brand-borderDark shadow-sm">
+          <div class="flex items-center gap-2 text-amber-500 text-base font-bold mb-3 font-mono">
+            <span>●</span> OPTIMIZATION FOCUS
+          </div>
+          <h3 class="font-display font-bold text-lg uppercase text-brand-textPrimary dark:text-white mb-2">
+            Written Detail Depth
+          </h3>
+          <p class="text-xs text-neutral-600 dark:text-zinc-400 leading-relaxed font-sans">
+            Encourage users to leave optional 2-sentence feedback to help
+            engineering isolate specific interaction edge cases.
+          </p>
+        </div>
+      </div>
+
+      <!-- Dynamic Feedback Synthesis Output Container -->
+      <div id="aiSynthesisContainer"
+        class="mt-8 hidden p-6 sm:p-8 rounded-sm bg-brand-dark text-white border-2 border-brand-acid shadow-2xl space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-white/10 gap-2">
+          <div class="flex items-center gap-3">
+            <span
+              class="w-8 h-8 rounded-full bg-brand-acid text-black flex items-center justify-center font-black text-sm">✦</span>
+            <div>
+              <h3 class="font-display font-black text-xl uppercase tracking-tight">
+                Real-Time Feedback Synthesis
+              </h3>
+              <p class="text-xs font-mono text-zinc-400">
+                Deterministic Sentiment Telemetry • Aggregated across all
+                stored entries
+              </p>
+            </div>
+          </div>
+          <span
+            class="text-[10px] font-mono px-3 py-1 rounded-full bg-brand-acid/10 text-brand-acid border border-brand-acid/30">
+            ENGINE ACTIVE
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-black/50 p-4 rounded-xs border border-white/10">
+            <h4 class="text-xs font-mono uppercase text-brand-acid font-bold mb-2">
+              Executive Sentiment
+            </h4>
+            <p id="aiExecutiveSummary" class="text-xs font-sans text-zinc-300 leading-relaxed"></p>
+          </div>
+          <div class="bg-black/50 p-4 rounded-xs border border-white/10">
+            <h4 class="text-xs font-mono uppercase text-cyan-400 font-bold mb-2">
+              Top Praised Aspects
+            </h4>
+            <ul id="aiPraisedList" class="text-xs font-sans text-zinc-300 space-y-1 list-disc list-inside"></ul>
+          </div>
+          <div class="bg-black/50 p-4 rounded-xs border border-white/10">
+            <h4 class="text-xs font-mono uppercase text-amber-400 font-bold mb-2">
+              Actionable Recommendations
+            </h4>
+            <ul id="aiActionableList" class="text-xs font-sans text-zinc-300 space-y-1 list-disc list-inside"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 10. RECENT FEEDBACK FEED & LIVE SUBMISSIONS                     -->
+  <!-- ============================================================== -->
+  <section id="reviews"
+    class="py-20 px-6 bg-white dark:bg-brand-dark border-b border-brand-surfaceStrong dark:border-brand-borderDark">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <span
+            class="inline-block text-xs font-mono font-bold uppercase tracking-widest text-brand-blue dark:text-brand-acid mb-2">
+            ✦ Community Stream
+          </span>
+          <h2
+            class="text-3xl sm:text-5xl font-display font-black uppercase tracking-tight text-brand-textPrimary dark:text-white">
+            Recent Feedback Feed
+          </h2>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <!-- Star Filter Pills -->
+          <div
+            class="flex items-center gap-1 bg-brand-surfaceRaised dark:bg-black/50 p-1 rounded-xs border border-brand-surfaceStrong dark:border-brand-borderDark text-xs font-mono">
+            <button class="filter-pill px-2.5 py-1 rounded-xs font-bold bg-brand-acid text-black" data-filter="all">
+              All
+            </button>
+            <button class="filter-pill px-2.5 py-1 rounded-xs hover:text-brand-acid text-zinc-500 dark:text-zinc-400"
+              data-filter="5">
+              5★
+            </button>
+            <button class="filter-pill px-2.5 py-1 rounded-xs hover:text-brand-acid text-zinc-500 dark:text-zinc-400"
+              data-filter="4">
+              4★
+            </button>
+            <button class="filter-pill px-2.5 py-1 rounded-xs hover:text-brand-acid text-zinc-500 dark:text-zinc-400"
+              data-filter="critical">
+              1-3★
+            </button>
+          </div>
+
+          <button id="clearAllReviewsBtn"
+            class="text-xs font-mono text-rose-500 hover:text-rose-600 underline font-bold cursor-pointer">
+            Clear Local
+          </button>
+        </div>
+      </div>
+
+      <!-- Search Input for Reviews -->
+      <div class="mb-6">
+        <input type="text" id="reviewSearchInput" placeholder="🔍 Search reviews by keyword or author name..."
+          class="w-full max-w-md px-4 py-2 text-xs font-mono rounded-xs bg-brand-surfaceRaised dark:bg-brand-cardDark border border-brand-surfaceStrong dark:border-brand-borderDark text-brand-textPrimary dark:text-white focus:border-brand-acid" />
+      </div>
+
+      <!-- Reviews Feed Grid -->
+      <div id="reviewsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 11. 3-STEP "HOW IT WORKS" WORKFLOW                              -->
+  <!-- ============================================================== -->
+  <section
+    class="py-20 px-6 bg-brand-surfaceRaised dark:bg-[#121216] border-b border-brand-surfaceStrong dark:border-brand-borderDark">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span
+          class="inline-block text-xs font-mono font-bold uppercase tracking-widest text-brand-blue dark:text-brand-acid mb-2">
+          ✦ Three Simple Steps
+        </span>
+        <h2
+          class="text-3xl sm:text-5xl font-display font-black uppercase tracking-tight text-brand-textPrimary dark:text-white">
+          How RateWise Works
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+        <!-- Step 1 -->
+        <div
+          class="bg-white dark:bg-brand-cardDark p-8 rounded-sm border border-brand-surfaceStrong dark:border-brand-borderDark relative shadow-md">
+          <div class="text-4xl font-display font-black text-brand-acid mb-4">
+            01
+          </div>
+          <h3 class="font-display font-bold text-xl uppercase text-brand-textPrimary dark:text-white mb-2">
+            Rate The Experience
+          </h3>
+          <p class="text-xs text-neutral-600 dark:text-zinc-400 font-sans leading-relaxed">
+            Select a star rating from 1 to 5 and optionally evaluate
+            individual criteria including UI/UX, Speed, and Accessibility.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div
+          class="bg-white dark:bg-brand-cardDark p-8 rounded-sm border border-brand-surfaceStrong dark:border-brand-borderDark relative shadow-md">
+          <div class="text-4xl font-display font-black text-brand-blue mb-4">
+            02
+          </div>
+          <h3 class="font-display font-bold text-xl uppercase text-brand-textPrimary dark:text-white mb-2">
+            Share Written Context
+          </h3>
+          <p class="text-xs text-neutral-600 dark:text-zinc-400 font-sans leading-relaxed">
+            Provide qualitative thoughts in the optional review field. All
+            entries are validated and sanitized in real time.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div
+          class="bg-white dark:bg-brand-cardDark p-8 rounded-sm border border-brand-surfaceStrong dark:border-brand-borderDark relative shadow-md">
+          <div class="text-4xl font-display font-black text-brand-acid mb-4">
+            03
+          </div>
+          <h3 class="font-display font-bold text-xl uppercase text-brand-textPrimary dark:text-white mb-2">
+            Explore Telemetry
+          </h3>
+          <p class="text-xs text-neutral-600 dark:text-zinc-400 font-sans leading-relaxed">
+            Review distribution meters update immediately. Rule-based
+            heuristics compute actionable satisfaction trends instantly.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 12. FAQ ACCORDION (Section 19)                                  -->
+  <!-- ============================================================== -->
+  <section id="faq"
+    class="py-24 px-6 bg-white dark:bg-brand-dark border-b border-brand-surfaceStrong dark:border-brand-borderDark">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-14">
+        <span
+          class="inline-block text-xs font-mono font-bold uppercase tracking-widest text-brand-blue dark:text-brand-acid mb-2">
+          ✦ Questions &amp; Answers
+        </span>
+        <h2
+          class="text-3xl sm:text-5xl font-display font-black uppercase tracking-tight text-brand-textPrimary dark:text-white">
+          Frequently Asked Questions
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        <!-- FAQ Item 1 -->
+        <div
+          class="faq-item bg-brand-surfaceRaised dark:bg-brand-cardDark rounded-sm border border-brand-surfaceStrong dark:border-brand-borderDark overflow-hidden">
+          <button
+            class="faq-btn w-full p-6 text-left flex items-center justify-between font-display font-bold text-sm uppercase text-brand-textPrimary dark:text-white focus:outline-none cursor-pointer"
+            aria-expanded="false">
+            <span>What is RateWise AI?</span>
+            <span class="faq-icon text-lg font-mono text-brand-acid">+</span>
+          </button>
+          <div
+            class="faq-content hidden px-6 pb-6 text-xs text-neutral-600 dark:text-zinc-400 font-sans leading-relaxed">
+            RateWise AI is a complete frontend feedback intelligence platform
+            that elevates the classic 5-star rating widget into an
+            implementation-ready customer analytics experience driven by token
+            architecture.
+          </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div
+          class="faq-item bg-brand-surfaceRaised dark:bg-brand-cardDark rounded-sm border border-brand-surfaceStrong dark:border-brand-borderDark overflow-hidden">
+          <button
+            class="faq-btn w-full p-6 text-left flex items-center justify-between font-display font-bold text-sm uppercase text-brand-textPrimary dark:text-white focus:outline-none cursor-pointer"
+            aria-expanded="false">
+            <span>How does the 5-star rating widget work?</span>
+            <span class="faq-icon text-lg font-mono text-brand-acid">+</span>
+          </button>
+          <div
+            class="faq-content hidden px-6 pb-6 text-xs text-neutral-600 dark:text-zinc-400 font-sans leading-relaxed">
+            Each star is a semantic button supporting hover preview, keyboard
+            focus, and click selection. Hovering previews the score and
+            corresponding label without altering your committed rating until
+            clicked.
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div
+          class="faq-item bg-brand-surfaceRaised dark:bg-brand-cardDark rounded-sm border border-brand-surfaceStrong dark:border-brand-borderDark overflow-hidden">
+          <button
+            class="faq-btn w-full p-6 text-left flex items-center justify-between font-display font-bold text-sm uppercase text-brand-textPrimary dark:text-white focus:outline-none cursor-pointer"
+            aria-expanded="false">
+            <span>How are satisfaction percentages (CSAT) calculated?</span>
+            <span class="faq-icon text-lg font-mono text-brand-acid">+</span>
+          </button>
+          <div
+            class="faq-content hidden px-6 pb-6 text-xs text-neutral-600 dark:text-zinc-400 font-sans leading-relaxed">
+            CSAT represents the proportion of positive ratings (scores of 4 or
+            5 stars) divided by the total number of submitted reviews,
+            multiplied by 100.
+          </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div
+          class="faq-item bg-brand-surfaceRaised dark:bg-brand-cardDark rounded-sm border border-brand-surfaceStrong dark:border-brand-borderDark overflow-hidden">
+          <button
+            class="faq-btn w-full p-6 text-left flex items-center justify-between font-display font-bold text-sm uppercase text-brand-textPrimary dark:text-white focus:outline-none cursor-pointer"
+            aria-expanded="false">
+            <span>Is my feedback stored on a remote server?</span>
+            <span class="faq-icon text-lg font-mono text-brand-acid">+</span>
+          </button>
+          <div
+            class="faq-content hidden px-6 pb-6 text-xs text-neutral-600 dark:text-zinc-400 font-sans leading-relaxed">
+            No. In this implementation-ready frontend demonstration, submitted
+            feedback is stored securely and exclusively in your current
+            browser's localStorage.
+          </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div
+          class="faq-item bg-brand-surfaceRaised dark:bg-brand-cardDark rounded-sm border border-brand-surfaceStrong dark:border-brand-borderDark overflow-hidden">
+          <button
+            class="faq-btn w-full p-6 text-left flex items-center justify-between font-display font-bold text-sm uppercase text-brand-textPrimary dark:text-white focus:outline-none cursor-pointer"
+            aria-expanded="false">
+            <span>Does the platform support WCAG 2.2 AA accessibility?</span>
+            <span class="faq-icon text-lg font-mono text-brand-acid">+</span>
+          </button>
+          <div
+            class="faq-content hidden px-6 pb-6 text-xs text-neutral-600 dark:text-zinc-400 font-sans leading-relaxed">
+            Yes. Every interactive star, accordion, form input, and toggle
+            defines explicit focus-visible states (3px neon outline), contrast
+            compliance, and live screen-reader regions.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 13. FINAL CALL TO ACTION                                       -->
+  <!-- ============================================================== -->
+  <section
+    class="py-24 px-6 bg-brand-blue text-white relative overflow-hidden text-center border-b-4 border-brand-acid">
+    <div class="absolute -bottom-10 -right-10 text-white/5 pointer-events-none select-none">
+      <svg class="w-96 h-96 fill-current" viewBox="0 0 24 24">
+        <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
+      </svg>
+    </div>
+
+    <div class="max-w-4xl mx-auto relative z-10">
+      <span
+        class="inline-block px-4 py-1.5 rounded-full bg-black/40 border border-white/20 text-brand-acid font-mono text-xs uppercase tracking-wider mb-4">
+        ✦ Ready To Elevate Feedback?
+      </span>
+      <h2 class="text-4xl sm:text-6xl font-display font-black uppercase tracking-tight leading-none mb-6">
+        Every Experience Deserves To Be Heard.
+      </h2>
+      <p class="text-sm sm:text-base font-sans text-white/90 max-w-xl mx-auto mb-8">
+        Start exploring a simpler, clearer way to collect ratings and
+        transform customer sentiment into actionable design intelligence.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="#widget"
+          class="px-8 py-4 rounded-pill bg-brand-acid text-black font-display font-black uppercase text-xs tracking-wider hover:bg-brand-acidHover shadow-2xl transition active:scale-95 border-2 border-black">
+          Submit Your Rating Now ★
+        </a>
+        <button id="finalCheerBlastBtn"
+          class="px-8 py-4 rounded-pill bg-black text-brand-acid border-2 border-brand-acid font-display font-black uppercase text-xs tracking-wider hover:bg-black/80 shadow-2xl transition active:scale-95 flex items-center gap-2 cursor-pointer">
+          <span>🎉</span> Give Respect &amp; Cheer
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 14. PREMIUM FOOTER & TOKEN VERIFICATION                        -->
+  <!-- ============================================================== -->
+  <footer class="bg-black text-white pt-16 pb-12 px-6 border-t border-brand-borderDark">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+        <div class="md:col-span-2 space-y-4">
+          <div class="flex items-center gap-2">
+            <span class="text-brand-acid text-2xl font-black">★</span>
+            <span class="text-2xl font-black font-display uppercase tracking-tight">Starlytics<span
+                class="text-brand-acid">.AI</span></span>
+          </div>
+          <p class="text-xs text-zinc-400 font-sans max-w-sm leading-relaxed">
+            Smart Rating &amp; Customer Feedback Intelligence Platform. Built
+            on Pin Sans design tokens, WCAG 2.2 AA standards, and high-impact
+            Swiss aesthetic.
+          </p>
+          <div class="flex items-center gap-2 text-xs font-mono text-brand-acid pt-2">
+            <span class="w-2 h-2 rounded-full bg-brand-acid animate-ping"></span>
+            <span>Design.md &amp; Skill.md Token Architecture Verified</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300 mb-4">
+            Quick Navigation
+          </h4>
+          <ul class="space-y-2 text-xs text-zinc-400 font-sans">
+            <li>
+              <a href="#widget" class="hover:text-brand-acid transition">Interactive Star Widget</a>
+            </li>
+            <li>
+              <a href="#aspects" class="hover:text-brand-acid transition">Aspect Evaluation</a>
+            </li>
+            <li>
+              <a href="#analytics" class="hover:text-brand-acid transition">Telemetry &amp; CSAT</a>
+            </li>
+            <li>
+              <a href="#faq" class="hover:text-brand-acid transition">FAQ &amp; System Docs</a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300 mb-4">
+            Design Tokens
+          </h4>
+          <ul class="space-y-1.5 text-[11px] font-mono text-zinc-400">
+            <li>
+              Primary: <span class="text-brand-acid">#2244e8 (Cobalt)</span>
+            </li>
+            <li>
+              Accent: <span class="text-brand-acid">#cbf916 (Neon Lime)</span>
+            </li>
+            <li>Text: <span class="text-zinc-200">#211922</span></li>
+            <li>
+              Surfaces: <span class="text-zinc-200">#ffffff, #fbfbf9</span>
+            </li>
+            <li>Radii: <span class="text-zinc-200">8px, 16px, 50px</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 font-sans gap-4">
+        <div>
+          &copy; Starlytics AI Platform. Pin on Web Design System. All
+          rights reserved.
+        </div>
+        <div class="flex items-center gap-6">
+          <button id="backToTopBtn"
+            class="hover:text-brand-acid font-mono uppercase text-xs flex items-center gap-1 transition cursor-pointer">
+            <span>Back To Top</span> <span>↑</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================== -->
+  <!-- 15. FLOATING BLAST TRIGGER & ACCESSIBLE TOAST                  -->
+  <!-- ============================================================== -->
+  <div class="fixed bottom-6 right-6 z-40 flex items-center gap-2">
+    <button id="floatingCheerBlastBtn"
+      class="group flex items-center gap-2 px-5 py-3.5 rounded-pill bg-brand-acid text-black font-display font-black text-xs uppercase tracking-wider shadow-2xl hover:scale-105 active:scale-95 transition-all border-2 border-black cursor-pointer"
+      aria-label="Trigger Respect and Cheer Blast" title="Give Respect &amp; Cheer">
+      <span class="text-base group-hover:rotate-12 transition-transform">🎉</span>
+      <span>Give Respect &amp; Cheer</span>
+    </button>
+  </div>
+
+  <!-- AI Reply Generation Modal -->
+  <div id="aiReplyModal"
+    class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div
+      class="bg-brand-surfaceRaised dark:bg-brand-cardDark border-2 border-brand-acid rounded-sm max-w-lg w-full p-6 shadow-2xl relative space-y-4">
+      <div
+        class="flex items-center justify-between pb-3 border-b border-brand-surfaceStrong dark:border-brand-borderDark">
+        <div class="flex items-center gap-2">
+          <span class="text-brand-acid text-lg">💬</span>
+          <h3 class="font-display font-bold text-base uppercase text-brand-textPrimary dark:text-white">
+            Customer Support Response Generator
+          </h3>
+        </div>
+        <button id="closeAiModalBtn"
+          class="text-zinc-400 hover:text-white text-lg font-mono focus:outline-none cursor-pointer">
+          ✕
+        </button>
+      </div>
+
+      <div
+        class="text-xs font-mono text-zinc-500 dark:text-zinc-400 bg-white dark:bg-black/40 p-3 rounded-xs border border-brand-surfaceStrong dark:border-brand-borderDark">
+        <span class="font-bold text-brand-textPrimary dark:text-zinc-200">Customer Feedback:</span>
+        <p id="modalFeedbackExcerpt" class="mt-1 italic text-zinc-700 dark:text-zinc-300"></p>
+      </div>
+
+      <div>
+        <label
+          class="block text-xs font-mono font-bold uppercase tracking-wider text-brand-textPrimary dark:text-zinc-200 mb-1.5">
+          Select Tone:
+        </label>
+        <div class="flex gap-2">
+          <button type="button"
+            class="tone-btn px-3 py-1 text-xs font-mono rounded-xs border border-brand-acid bg-brand-acid text-black font-bold cursor-pointer"
+            data-tone="empathetic">
+            Empathetic
+          </button>
+          <button type="button"
+            class="tone-btn px-3 py-1 text-xs font-mono rounded-xs border border-zinc-600 bg-black/30 text-zinc-300 cursor-pointer"
+            data-tone="professional">
+            Professional
+          </button>
+          <button type="button"
+            class="tone-btn px-3 py-1 text-xs font-mono rounded-xs border border-zinc-600 bg-black/30 text-zinc-300 cursor-pointer"
+            data-tone="action-oriented">
+            Action-Oriented
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <label
+          class="block text-xs font-mono font-bold uppercase tracking-wider text-brand-textPrimary dark:text-zinc-200 mb-1.5">
+          Response Draft:
+        </label>
+        <textarea id="modalGeneratedReply" rows="4"
+          class="w-full p-3 text-xs font-sans rounded-xs bg-white dark:bg-black/60 border border-brand-surfaceStrong dark:border-brand-borderDark text-brand-textPrimary dark:text-white focus:border-brand-acid"></textarea>
+      </div>
+
+      <div class="flex items-center justify-between pt-2">
+        <button id="copyAiReplyBtn"
+          class="px-4 py-2 rounded-pill bg-brand-acid text-black font-mono font-bold text-xs hover:bg-brand-acidHover border border-black flex items-center gap-1.5 cursor-pointer">
+          <span>📋</span> Copy Response
+        </button>
+        <span id="modalAiStatus" class="text-xs font-mono text-emerald-500 font-bold">✓ Ready to Send</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastBox"
+    class="fixed top-6 right-6 px-5 py-3 rounded-pill bg-black text-white border-2 border-brand-acid text-xs font-mono font-bold shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2"
+    role="status" aria-live="polite">
+    <span id="toastIcon">✨</span>
+    <span id="toastMsg">Action Successful!</span>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 16. JAVASCRIPT: APPLICATION LOGIC, STATE & SOUND ENGINE         -->
+  <!-- ============================================================== -->
+  <script src="script.js"></script>
+</body>
+
+</html>
